@@ -25,7 +25,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   initDoorDefaults();
   buildPalettes();
-  buildDoorSizeControls();
+  syncDoorHeightLimits();
   bindControls();
   updateColorVisibility();
   render();
