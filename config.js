@@ -23,12 +23,9 @@ const CONFIG = {
   colors: [
     { id: 'white',    name: 'Белый',         hex: '#F5F5F0' },
     { id: 'sonoma',   name: 'Дуб сонома',    hex: '#C4A882' },
-    { id: 'wenge',    name: 'Венге',          hex: '#3E2723' },
-    { id: 'buk',      name: 'Бук',           hex: '#D4A76A' },
-    { id: 'olha',     name: 'Ольха',         hex: '#B8894A' },
     { id: 'grey',     name: 'Серый',         hex: '#9E9E9E' },
     { id: 'antracit', name: 'Антрацит',      hex: '#424242' },
-    { id: 'oak',      name: 'Дуб натуральный', hex: '#BFA76A' },
+    
   ],
 
   // Цвет жалюзийных створок (фиксированный — сосна)

@@ -133,12 +133,21 @@ function renderSVG() {
   parts.push(svgRect(r(mainX + ftPx), r(startY + cabH - ftPx), r(mainWpx - 2 * ftPx), ftPx, frameColor, darken(frameColor, 30), 1));
 
   // ======== РАЗДЕЛИТЕЛЬНАЯ ПОЛКА (между створками и открытой зоной) ========
-  if (bottomOpenCm > 1) {
+  /*if (bottomOpenCm > 1) {
     const divShelfLeft = r(startX + ftPx);
     const divShelfRight = r(startX + nicheWpx - ftPx);
     const divShelfW = r(divShelfRight - divShelfLeft);
     parts.push(svgRect(
       divShelfLeft, r(doorBottomY - stPx / 2), divShelfW, stPx,
+      shelfColor, darken(shelfColor, 25), 0.9
+    ));*/
+
+  if (bottomOpenCm > 1) {
+    const divShelfLeft = r(startX + ftPx);
+    const divShelfRight = r(startX + nicheWpx - ftPx);
+    const divShelfW = r(divShelfRight - divShelfLeft);
+    parts.push(svgRect(
+      divShelfLeft, r(doorBottomY), divShelfW, stPx,
       shelfColor, darken(shelfColor, 25), 0.9
     ));
 
