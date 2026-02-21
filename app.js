@@ -22,17 +22,18 @@
  *   config.js → state.js → render-svg.js → price.js → modal.js → ui.js → app.js
  */
 
-document.addEventListener('DOMContentLoaded', () => {
-  initDoorDefaults();
-  buildPalettes();
-  syncDoorHeightLimits();
-  bindControls();
-  updateColorVisibility();
-  render();
-});
-
-/** Центральная функция перерисовки (SVG + цена) */
 function render() {
   renderSVG();
   renderPrice();
+  updateColorVisibility();
 }
+
+window.addEventListener('DOMContentLoaded', () => {
+  initDoorDefaults();
+  buildPalettes();
+  bindControls();
+  updateColorVisibility();
+  syncDoorHeightLimits();
+  updateBottomOpenInfo();
+  render();
+});

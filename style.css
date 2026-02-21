@@ -36,6 +36,13 @@ body {
   gap: 20px;
 }
 
+.price-note {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #666;
+  line-height: 1.35;
+}
+
 /* ===== ПАНЕЛЬ: ЭЛЕМЕНТЫ ===== */
 .panel h2 {
   font-size: 18px;
@@ -311,7 +318,7 @@ body {
   height: auto;
 }
 
-/* ===== инфоблок ===== */
+/* ===== МОДАЛЬНОЕ ОКНО ===== */
 
 .info-panel {
   margin-top: 16px;
@@ -430,6 +437,41 @@ body {
 
 .btn-cancel:hover { background: #d0d0d0; }
 
+
+/* ===== COMPACT PANEL ===== */
+.panel { padding: 16px; gap: 10px; }
+
+.panel h2 { font-size: 16px; padding-bottom: 6px; margin-bottom: 2px; }
+
+.section-title { font-size: 13px; margin-top: 4px; padding-top: 6px; }
+
+.control-group { gap: 5px; }
+.control-group label { font-size: 11px; letter-spacing: 0.4px; }
+
+.slider-row { gap: 9px; }
+.slider-value { font-size: 14px; min-width: 46px; }
+
+.counter button { width: 28px; height: 28px; font-size: 16px; }
+.counter .counter-value { font-size: 16px; }
+
+.radio-group label { font-size: 12px; padding: 6px 8px; border-width: 1px; }
+
+.color-palette { gap: 5px; }
+.color-swatch { width: 32px; height: 32px; border-radius: 6px; border-width: 2px; }
+
+.checkbox-row { font-size: 13px; }
+.checkbox-row input { width: 16px; height: 16px; }
+
+.sub-group { margin-left: 10px; padding-left: 10px; gap: 4px; }
+
+.info-text, .jaluzi-note { font-size: 11px; }
+
+.price-block { padding: 12px; }
+.price-block h3 { font-size: 13px; margin-bottom: 6px; }
+.price-line { font-size: 12px; }
+.price-total { font-size: 18px; margin-top: 8px; padding-top: 8px; }
+
+.btn-order { padding: 12px; font-size: 15px; }
 /* ===== RESPONSIVE ===== */
 @media (max-width: 800px) {
   .app {
