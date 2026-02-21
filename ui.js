@@ -1,45 +1,7 @@
-/**
- * ui.js — УПРАВЛЕНИЕ ИНТЕРФЕЙСОМ (DOM-контролы, палитры, видимость)
- * ====================================================================
- * Жалюзи и ЛДСП используют единый слайдер высоты створки (state.doorHeight).
- * Различие только в цвете: жалюзи — фиксированный CONFIG.jaluziColor.hex.
- *
- * Содержит:
- *
- * 1. ПАЛИТРЫ ЦВЕТОВ:
- *    - buildPalettes() — создаёт палитры основного цвета (#paletteMain)
- *      и цвета створок (#paletteDoor)
- *    - buildColorPalette(containerId, activeId, onClick)
- *    - updatePaletteActive(paletteId, activeId)
- *    - isColorDark(hex)
- *
- * 2. ВИДИМОСТЬ СЕКЦИЙ ЦВЕТА:
- *    - updateColorVisibility()
- *
- * 3. КОНТРОЛЫ РАЗМЕРОВ СТВОРОК:
- *    - syncDoorHeightLimits() — синхронизирует min/max слайдера высоты створок
- *    - updateBottomOpenInfo() — подпись «Открытая полка снизу: X см»
- *
- * 4. ПРИВЯЗКА КОНТРОЛОВ:
- *    - bindControls()
- *    - bindSlider() / bindCounter()
- *
- * 5. ИНИЦИАЛИЗАЦИЯ ДЕФОЛТОВ:
- *    - initDoorDefaults()
- *
- * Зависимости: config.js, state.js, render-svg.js, price.js, modal.js
- */
-
-
-// ============================================================
-// ПАЛИТРЫ ЦВЕТОВ
-// ============================================================
-
-/** Создаёт обе палитры (основной цвет и цвет створок) */
 function buildPalettes() {
-  buildColorPalette('paletteMain', state.mainColorId, (id) => {
-    state.mainColorId = id;
-    updatePaletteActive('paletteMain', id);
+  buildColorPalette('paletteBody', state.bodyColorId, (id) => {
+    state.bodyColorId = id;
+    updatePaletteActive('paletteBody', id);
     render();
   });
 
@@ -50,7 +12,6 @@ function buildPalettes() {
   });
 }
 
-/** Генерирует сетку цветных квадратов в контейнере */
 function buildColorPalette(containerId, activeId, onClick) {
   const container = document.getElementById(containerId);
   if (!container) return;
@@ -72,7 +33,6 @@ function buildColorPalette(containerId, activeId, onClick) {
   });
 }
 
-/** Переключает класс active на палитре */
 function updatePaletteActive(paletteId, activeId) {
   document.querySelectorAll(`#${paletteId} .color-swatch`).forEach(el => {
     el.classList.toggle('active', el.dataset.id === activeId);
@@ -82,7 +42,6 @@ function updatePaletteActive(paletteId, activeId) {
   });
 }
 
-/** Определяет, тёмный ли цвет (для контрастной рамки). Поддерживает hex и rgb() */
 function isColorDark(hex) {
   if (hex.startsWith('rgb')) {
     const m = hex.match(/(\d+)/g);
@@ -95,45 +54,19 @@ function isColorDark(hex) {
   return (r * 0.299 + g * 0.587 + b * 0.114) < 128;
 }
 
-
-// ============================================================
-// ВИДИМОСТЬ СЕКЦИЙ ЦВЕТА
-// ============================================================
-
-/** Показывает/скрывает секции выбора цвета в зависимости от типа створок */
 function updateColorVisibility() {
-  const colorSection = document.getElementById('colorSection');
   const doorColorGroup = document.getElementById('doorColorGroup');
-  const mainColorGroup = document.getElementById('mainColorGroup');
-  const separateDoorColorGroup = document.getElementById('separateDoorColorGroup');
+  const bodyColorGroup = document.getElementById('bodyColorGroup');
 
   if (state.doorType === 'jaluzi') {
-    // Жалюзи: палитра основного цвета видна (каркас/полки),
-    // но отдельный цвет створок скрыт (створки всегда CONFIG.jaluziColor)
-    colorSection.classList.remove('disabled-section');
-    mainColorGroup.classList.remove('hidden');
-    separateDoorColorGroup.classList.add('hidden');
     doorColorGroup.classList.add('hidden');
+    bodyColorGroup.classList.remove('hidden');
   } else {
-    // ЛДСП: основной цвет + опционально отдельный для створок
-    colorSection.classList.remove('disabled-section');
-    mainColorGroup.classList.remove('hidden');
-    separateDoorColorGroup.classList.remove('hidden');
-
-    if (state.separateDoorColor) {
-      doorColorGroup.classList.remove('hidden');
-    } else {
-      doorColorGroup.classList.add('hidden');
-    }
+    doorColorGroup.classList.remove('hidden');
+    bodyColorGroup.classList.remove('hidden');
   }
 }
 
-
-// ============================================================
-// КОНТРОЛЫ РАЗМЕРОВ СТВОРОК
-// ============================================================
-
-/** Синхронизирует min/max слайдера высоты створок с текущим каркасом */
 function syncDoorHeightLimits() {
   const innerH = state.height - 2 * CONFIG.frameThickness;
   const maxH = Math.min(CONFIG.ldspDoorHeight.max, Math.floor(innerH));
@@ -145,14 +78,13 @@ function syncDoorHeightLimits() {
   slider.min = minH;
   slider.max = maxH;
 
-  // Ограничиваем текущее значение
   if (state.doorHeight > maxH) state.doorHeight = maxH;
   if (state.doorHeight < minH) state.doorHeight = minH;
+
   slider.value = state.doorHeight;
   document.getElementById('valDoorH').textContent = state.doorHeight + ' см';
 }
 
-/** Обновляет информацию об открытой полке снизу */
 function updateBottomOpenInfo() {
   const bottomCm = getBottomOpenCm();
   const info = document.getElementById('infoDoorHeight');
@@ -170,15 +102,7 @@ function updateBottomOpenInfo() {
   }
 }
 
-
-// ============================================================
-// ПРИВЯЗКА КОНТРОЛОВ
-// ============================================================
-
-/** Главная функция привязки всех обработчиков событий */
 function bindControls() {
-
-  // --- Слайдеры габаритов ---
   bindSlider('sliderHeight', 'valHeight', v => {
     state.height = v;
     syncDoorHeightLimits();
@@ -188,20 +112,17 @@ function bindControls() {
   bindSlider('sliderWidth', 'valWidth', v => { state.width = v; }, 'см');
   bindSlider('sliderDepth', 'valDepth', v => { state.depth = v; }, 'см');
 
-  // --- Высота створки (единый слайдер для ЛДСП и жалюзи) ---
   bindSlider('sliderDoorH', 'valDoorH', v => {
     state.doorHeight = v;
     updateBottomOpenInfo();
   }, 'см');
 
-  // --- Счётчики: полки и створки ---
   bindCounter('shelvesMin', 'shelvesPlus', 'valShelves', 1, 5,
     () => state.shelves, v => { state.shelves = v; });
 
   bindCounter('doorsMin', 'doorsPlus', 'valDoors', 1, 4,
     () => state.doors, v => { state.doors = v; });
 
-  // --- Тип створок (радиокнопки) ---
   document.querySelectorAll('input[name="doorType"]').forEach(radio => {
     radio.addEventListener('change', e => {
       state.doorType = e.target.value;
@@ -210,7 +131,13 @@ function bindControls() {
     });
   });
 
-  // --- Боковая полка: чекбокс + настройки ---
+  document.querySelectorAll('input[name="bodyType"]').forEach(radio => {
+    radio.addEventListener('change', e => {
+      state.bodyType = e.target.value;
+      render();
+    });
+  });
+
   const chk = document.getElementById('chkSideShelf');
   const opts = document.getElementById('sideShelfOptions');
   if (chk && opts) {
@@ -233,17 +160,6 @@ function bindControls() {
   bindCounter('sideShelvesMinus', 'sideShelvesPlus', 'valSideShelves', 1, 5,
     () => state.sideShelves, v => { state.sideShelves = v; });
 
-  // --- Отдельный цвет створок ---
-  const chkDoorColor = document.getElementById('chkSeparateDoorColor');
-  if (chkDoorColor) {
-    chkDoorColor.addEventListener('change', () => {
-      state.separateDoorColor = chkDoorColor.checked;
-      updateColorVisibility();
-      render();
-    });
-  }
-
-  // --- Модальное окно ---
   document.getElementById('btnOrder').addEventListener('click', openModal);
   document.getElementById('btnCancel').addEventListener('click', closeModal);
   document.getElementById('btnSend').addEventListener('click', sendOrder);
@@ -252,7 +168,6 @@ function bindControls() {
   });
 }
 
-/** Утилита: привязка слайдера к state-полю */
 function bindSlider(sliderId, valId, setter, suffix) {
   const slider = document.getElementById(sliderId);
   const val = document.getElementById(valId);
@@ -265,7 +180,6 @@ function bindSlider(sliderId, valId, setter, suffix) {
   });
 }
 
-/** Утилита: привязка счётчика +/- к state-полю */
 function bindCounter(minBtnId, plusBtnId, valId, min, max, getter, setter) {
   const valEl = document.getElementById(valId);
   const minBtn = document.getElementById(minBtnId);
@@ -282,16 +196,8 @@ function bindCounter(minBtnId, plusBtnId, valId, min, max, getter, setter) {
   });
 }
 
-
-// ============================================================
-// ИНИЦИАЛИЗАЦИЯ ДЕФОЛТОВ СТВОРОК
-// ============================================================
-
-/** Вычисляет начальную высоту створок на основе текущего каркаса */
 function initDoorDefaults() {
   const innerH = state.height - 2 * CONFIG.frameThickness;
-
-  // Высота створки = внутренняя высота − дефолтная открытая зона снизу
   state.doorHeight = Math.max(
     CONFIG.ldspDoorHeight.min,
     Math.min(CONFIG.ldspDoorHeight.max, Math.round(innerH - CONFIG.defaultBottomOpenHeight))

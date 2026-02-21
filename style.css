@@ -311,6 +311,41 @@ body {
   height: auto;
 }
 
+/* ===== инфоблок ===== */
+
+.info-panel {
+  margin-top: 16px;
+  padding: 12px;
+  background: #f7f7f7;
+  border-radius: 10px;
+  border: 1px solid #e2e2e2;
+  font-size: 14px;
+}
+
+.info-title {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.info-item {
+  margin-bottom: 8px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 6px 8px;
+  border: 1px solid #eee;
+}
+
+.info-item summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.info-item .info-text {
+  margin-top: 6px;
+  color: #555;
+  line-height: 1.35;
+}
+
 /* ===== МОДАЛЬНОЕ ОКНО ===== */
 .modal-overlay {
   display: none;

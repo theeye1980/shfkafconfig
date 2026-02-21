@@ -40,6 +40,18 @@
       </div>
     </div>
 
+    <!-- === СЕКЦИЯ: корпус === -->
+    <div class="section-title">Корпус</div>
+
+    <div class="control-group">
+      <label>Материал корпуса</label>
+      <div class="radio-group">
+        <input type="radio" name="bodyType" id="bodyLDSP" value="ldsp" checked>
+        <label for="bodyLDSP">ЛДСП</label>
+        <input type="radio" name="bodyType" id="bodyShield" value="shield">
+        <label for="bodyShield">Мебельный щит</label>
+      </div>
+    </div>
     <!-- === СЕКЦИЯ: СТВОРКИ === -->
     <div class="section-title">Створки</div>
 
@@ -122,28 +134,19 @@
     </div>
 
     <!-- === СЕКЦИЯ: ЦВЕТА === -->
-    <div class="section-title">Цвет</div>
+<div class="section-title">Цвет</div>
 
-    <div id="colorSection">
-   
+<div id="colorSection">
+  <div class="control-group" id="bodyColorGroup">
+    <label>Цвет корпуса</label>
+    <div class="color-palette" id="paletteBody"></div>
+  </div>
 
-      <div class="control-group" id="mainColorGroup">
-        <label>Основной цвет (корпус, полки)</label>
-        <div class="color-palette" id="paletteMain"></div>
-      </div>
-
-      <div class="control-group" id="separateDoorColorGroup">
-        <label class="checkbox-row">
-          <input type="checkbox" id="chkSeparateDoorColor">
-          Отдельный цвет створок
-        </label>
-      </div>
-
-      <div class="control-group hidden" id="doorColorGroup">
-        <label>Цвет створок</label>
-        <div class="color-palette" id="paletteDoor"></div>
-      </div>
-    </div>
+  <div class="control-group" id="doorColorGroup">
+    <label>Цвет створок</label>
+    <div class="color-palette" id="paletteDoor"></div>
+  </div>
+</div>
 
     <!-- Цена -->
     <div class="price-block" id="priceBlock"></div>
@@ -157,6 +160,40 @@
     <div class="svg-container" id="svgContainer">
       <svg id="cabinetSVG" viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg"></svg>
     </div>
+    <div class="info-panel" id="infoPanel">
+  <div class="info-title">Выбранные материалы и опции</div>
+
+  <details class="info-item" open>
+    <summary>Материал корпуса: ЛДСП</summary>
+    <div class="info-text">
+      ЛДСП значительно дешевле мебельного щита (примерно на 40%). 
+      Подходит для влажных помещений.
+    </div>
+  </details>
+
+  <details class="info-item">
+    <summary>Материал створок: Жалюзийная дверь</summary>
+    <div class="info-text">
+      Рекомендуется покрыть защитой. Створки можно покрыть после монтажа.
+    </div>
+  </details>
+
+  <details class="info-item">
+    <summary>Открытая полка снизу: Есть</summary>
+    <div class="info-text">
+      Удобно для хранения бытовой химии или корзин. 
+      Высоту можно регулировать.
+    </div>
+  </details>
+
+  <details class="info-item">
+    <summary>Боковая полка: Есть</summary>
+    <div class="info-text">
+      Добавляет зону для хранения мелочей. 
+      Можно выбрать сторону и количество полок.
+    </div>
+  </details>
+</div>
   </div>
 </div>
 
