@@ -156,6 +156,11 @@ function renderInfoPanel() {
       <summary>${sideTitle}</summary>
       <div class="info-text">${sideText}</div>
     </details>
+        <details class="info-item">
+      <summary>Фурнитура</summary>
+      <div class="info-text">В стандатрном виде сюда входит крепеж, простые петли БЕЗ доводчика, упор-защелка для открывания створок, а также набор уголков для крепления полочек. <br> 
+      При желании поставить створки с доводчиком, сообщите мастеру или менеджеру</div>
+    </details>
   `;
 }
 

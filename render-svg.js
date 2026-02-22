@@ -289,6 +289,9 @@ function renderSVG() {
   const dimOff = S.dimLineOffset;
   const dimCol = S.dimColor;
   const fontSize = S.dimFontSize;
+  // Верхние уровни размерных линий
+  const dimYOverall = r(startY - gap - dimOff - 24); // выше
+  const dimYSections = r(startY - gap - dimOff);     // ниже
 
   // Высота (справа)
   const rightEdge = r(startX + nicheWpx);
@@ -298,47 +301,48 @@ function renderSVG() {
   parts.push(dimText(r(rightEdge + gap + dimOff + 6), r(startY + cabH / 2),
     state.height + ' см', dimCol, fontSize, 'start', -90));
 
-  // Ширина (сверху)
-  parts.push(dimLine(startX, r(startY - gap - dimOff), r(startX + nicheWpx), r(startY - gap - dimOff), dimCol));
-  parts.push(dimArrow(startX, r(startY - gap - dimOff), 'left', dimCol));
-  parts.push(dimArrow(r(startX + nicheWpx), r(startY - gap - dimOff), 'right', dimCol));
-  parts.push(dimText(r(startX + nicheWpx / 2), r(startY - gap - dimOff - 6),
+  // Ширина ниши (габарит) — ВЫШЕ
+  parts.push(dimLine(startX, dimYOverall, r(startX + nicheWpx), dimYOverall, dimCol));
+  parts.push(dimArrow(startX, dimYOverall, 'left', dimCol));
+  parts.push(dimArrow(r(startX + nicheWpx), dimYOverall, 'right', dimCol));
+  parts.push(dimText(r(startX + nicheWpx / 2), r(dimYOverall - 6),
     state.width + ' см (ниша)', dimCol, fontSize, 'middle', 0));
 
-  // Ширина секций (если есть боковая)
+  // Ширина секций — НИЖЕ (если есть боковая)
   if (state.sideShelf) {
-    const dimY2 = r(startY - gap - dimOff - 24);
+    const dimY2 = dimYSections;
 
-    // Основная секция
-    parts.push(dimLine(mainX, dimY2, r(mainX + mainWpx), dimY2, '#999'));
-    parts.push(dimArrow(mainX, dimY2, 'left', '#999'));
-    parts.push(dimArrow(r(mainX + mainWpx), dimY2, 'right', '#999'));
+    parts.push(dimLine(mainX, dimY2, r(mainX + mainWpx), dimY2, dimCol));
+    parts.push(dimArrow(mainX, dimY2, 'left', dimCol));
+    parts.push(dimArrow(r(mainX + mainWpx), dimY2, 'right', dimCol));
     parts.push(dimText(r(mainX + mainWpx / 2), r(dimY2 - 6),
-      mainWidthCm.toFixed(1) + ' см', '#999', 11, 'middle', 0));
+      mainWidthCm.toFixed(1) + ' см', dimCol, fontSize, 'middle', 0));
 
-    // Боковая секция
     const sideStartX2 = sideX;
     const sideEndX = r(sideStartX2 + sideWpx);
-    parts.push(dimLine(sideStartX2, dimY2, sideEndX, dimY2, '#999'));
-    parts.push(dimArrow(sideStartX2, dimY2, 'left', '#999'));
-    parts.push(dimArrow(sideEndX, dimY2, 'right', '#999'));
+    parts.push(dimLine(sideStartX2, dimY2, sideEndX, dimY2, dimCol));
+    parts.push(dimArrow(sideStartX2, dimY2, 'left', dimCol));
+    parts.push(dimArrow(sideEndX, dimY2, 'right', dimCol));
     parts.push(dimText(r((sideStartX2 + sideEndX) / 2), r(dimY2 - 6),
-      sideSectionCm.toFixed(1) + '', '#999', 11, 'middle', 0));
+      sideSectionCm.toFixed(1) + ' см', dimCol, fontSize, 'middle', 0));
   }
 
   // Высота створок (слева, если есть открытая зона)
   if (bottomOpenCm > 1) {
-    const leftEdge = mainX;
+    const leftEdge = (state.sideShelf && state.sideShelfSide === 'left')
+      ? startX
+      : mainX;
+
     const dlX = r(leftEdge - gap - dimOff);
-    parts.push(dimLine(dlX, doorTopY, dlX, doorBottomY, '#4a7c59'));
-    parts.push(dimArrow(dlX, doorTopY, 'up', '#4a7c59'));
-    parts.push(dimArrow(dlX, doorBottomY, 'down', '#4a7c59'));
+    parts.push(dimLine(dlX, doorTopY, dlX, doorBottomY, dimCol));
+    parts.push(dimArrow(dlX, doorTopY, 'up', dimCol));
+    parts.push(dimArrow(dlX, doorBottomY, 'down', dimCol));
     parts.push(dimText(r(dlX - 6), r(doorTopY + doorHpx / 2),
-      doorHcm.toFixed(1) + '', '#4a7c59', 11, 'end', -90));
+      doorHcm.toFixed(1) + '', dimCol, 11, 'end', -90));
   }
 
-  svg.innerHTML = parts.join('\n');
-}
+    svg.innerHTML = parts.join('\n');
+  }
 
 
 // ======== SVG-ХЕЛПЕРЫ ========
