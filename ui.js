@@ -68,8 +68,7 @@ function updateColorVisibility() {
 }
 
 function syncDoorHeightLimits() {
-  const innerH = state.height - 2 * CONFIG.frameThickness;
-  const maxH = Math.min(CONFIG.ldspDoorHeight.max, Math.floor(innerH));
+  const maxH = state.height - 4;
   const minH = CONFIG.ldspDoorHeight.min;
 
   const slider = document.getElementById('sliderDoorH');
@@ -100,6 +99,60 @@ function updateBottomOpenInfo() {
     info.textContent = 'Открытая полка снизу: нет';
     info.style.color = '#888';
   }
+}
+
+function renderInfoPanel() {
+  const panel = document.getElementById('infoPanel');
+  if (!panel) return;
+
+  const bottomCm = getBottomOpenCm();
+  const hasBottom = bottomCm > 1;
+
+  const bodyTitle = state.bodyType === 'ldsp'
+    ? 'Материал корпуса: ЛДСП'
+    : 'Материал корпуса: Мебельный щит';
+  const bodyText = state.bodyType === 'ldsp'
+    ? 'ЛДСП дешевле, стабильный материал, подходит для влажных помещений.'
+    : 'Массив, выше стоимость, но теплее и «живее» выглядит.';
+
+  const doorTitle = state.doorType === 'ldsp'
+    ? 'Материал створок: ЛДСП'
+    : 'Материал створок: Жалюзийная дверь';
+  const doorText = state.doorType === 'ldsp'
+    ? 'Можно подобрать цвет под интерьер.'
+    : 'Рекомендуется покрыть защитой. Створки можно покрыть после монтажа.';
+
+  const bottomTitle = hasBottom
+    ? `Открытая полка снизу: ${bottomCm.toFixed(1)} см`
+    : 'Открытая полка снизу: нет';
+  const bottomText = hasBottom
+    ? 'Удобно для хранения бытовой химии или корзин.'
+    : 'Створки закрывают весь проём.';
+
+  const sideTitle = state.sideShelf ? 'Боковая полка: есть' : 'Боковая полка: нет';
+  const sideText = state.sideShelf
+    ? `Сторона: ${state.sideShelfSide === 'left' ? 'слева' : 'справа'}, полок: ${state.sideShelves}.`
+    : 'Можно добавить боковую секцию для мелочей.';
+
+  panel.innerHTML = `
+    <div class="info-title">Выбранные материалы и опции</div>
+    <details class="info-item" open>
+      <summary>${bodyTitle}</summary>
+      <div class="info-text">${bodyText}</div>
+    </details>
+    <details class="info-item">
+      <summary>${doorTitle}</summary>
+      <div class="info-text">${doorText}</div>
+    </details>
+    <details class="info-item">
+      <summary>${bottomTitle}</summary>
+      <div class="info-text">${bottomText}</div>
+    </details>
+    <details class="info-item">
+      <summary>${sideTitle}</summary>
+      <div class="info-text">${sideText}</div>
+    </details>
+  `;
 }
 
 function bindControls() {

@@ -56,6 +56,7 @@ const CONFIG = {
       baseDoors: { ldsp: 3000, jaluzi: 5000 },
       sizeBase: { w: 105, h: 116, d: 30 },
       sizeOverPerCm: 60,
+      hardwareFixed: 1200, // ← фурнитура и соединения
     },
 
     framePerM2: 2000,

@@ -26,6 +26,7 @@ function render() {
   renderSVG();
   renderPrice();
   updateColorVisibility();
+  renderInfoPanel();
 }
 
 window.addEventListener('DOMContentLoaded', () => {
