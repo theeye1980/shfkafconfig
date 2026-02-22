@@ -129,11 +129,15 @@ function renderInfoPanel() {
     ? 'Удобно для хранения бытовой химии или корзин.'
     : 'Створки закрывают весь проём.';
 
-  const sideTitle = state.sideShelf ? 'Боковая полка: есть' : 'Боковая полка: нет';
+  const sectionH = getSideShelfSectionHeightCm();
+  const sideTitle = state.sideShelf
+  ? `Боковые открытые полки с высотой ${sectionH.toFixed(1)} см`
+  : 'Боковая полка: нет';
+  
   const sideText = state.sideShelf
-    ? `Сторона: ${state.sideShelfSide === 'left' ? 'слева' : 'справа'}, полок: ${state.sideShelves}.`
-    : 'Можно добавить боковую секцию для мелочей.';
-
+  ? `Сторона: ${state.sideShelfSide === 'left' ? 'слева' : 'справа'}, полок: ${state.sideShelves}, высота секции: ${sectionH.toFixed(1)} см.`
+  : 'Можно добавить боковую секцию для мелочей.';
+  
   panel.innerHTML = `
     <div class="info-title">Выбранные материалы и опции</div>
     <details class="info-item" open>

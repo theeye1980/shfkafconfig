@@ -36,6 +36,22 @@ function getBottomOpenCm() {
   return innerH - getDoorHeightCm();
 }
 
+function getSideShelfSectionHeightCm() {
+  if (!state.sideShelf) return 0;
+
+  const ft = CONFIG.frameThickness;
+  const st = CONFIG.shelfThickness;
+  const innerH = state.height - 2 * ft;
+
+  const bottomOpenCm = getBottomOpenCm();
+  const sideInnerH = (bottomOpenCm > 1)
+    ? (innerH - bottomOpenCm - st / 2)
+    : innerH;
+
+  const segments = state.sideShelves + 1;
+  return Math.max(0, sideInnerH / segments);
+}
+
 function getFrameHex() {
   return CONFIG.colors.find(c => c.id === state.bodyColorId)?.hex || '#F5F5F0';
 }
