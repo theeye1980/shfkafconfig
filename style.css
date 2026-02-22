@@ -491,3 +491,27 @@ body {
     padding: 16px 12px;
   }
 }
+
+/* ===== INFO PANEL — стиль как у панели ===== */
+.info-panel {
+  margin-top: 0;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  font-size: 14px;
+  width: 100%;
+  max-width: 750px;
+}
+
+/* подровнять элементы внутри */
+.info-title { font-size: 16px; border-bottom: 2px solid #e0e0e0; padding-bottom: 6px; margin-bottom: 8px; }
+.info-item { border: 1px solid #ddd; }
+
+/* ===== MOBILE ORDER ===== */
+@media (max-width: 800px) {
+  .viewport { display: contents; }
+  .svg-container { order: 1; }
+  .panel { order: 2; }
+  .info-panel { order: 3; }
+}
