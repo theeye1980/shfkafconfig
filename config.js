@@ -52,15 +52,15 @@ const CONFIG = {
     visit: 1500,
 
     materials: {
-      baseBody: { ldsp: 4000, shield: 6000 },
-      baseDoors: { ldsp: 3000, jaluzi: 5000 },
+      baseBody: { ldsp: 3100, shield: 7900 },
+      baseDoors: { ldsp: 3100, jaluzi: 4000 },
       sizeBase: { w: 105, h: 116, d: 30 },
       sizeOverPerCm: 60,
       hardwareFixed: 1200, // ← фурнитура и соединения
     },
 
-    framePerM2: 2000,
-    ldspPerM2: 1000,
+    framePerM2: 800,
+    ldspPerM2: 400,
     dvpPerM2: 400,
     jaluziPerDoor: 1200,
     jaluziPerM2: 2000,
