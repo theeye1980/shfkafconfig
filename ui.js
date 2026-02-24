@@ -113,14 +113,14 @@ function renderInfoPanel() {
     : 'Массив, выше стоимость, но теплее и «живее» выглядит. Требует обработки с целью защиты от грибка и влаги. Нужно делать ДО монтажа.';
 
   const doorTitle = state.doorType === 'ldsp'
-    ? `Створки: выбран материал ЛДСП, высота ${Math.round(getDoorHeightCm())} см`
-    : `Створки: выбрана жалюзийная дверь, высота ${Math.round(getDoorHeightCm())} см`;
+    ? `Створки: ЛДСП, высота ${Math.round(getDoorHeightCm())} см`
+    : `Створки: Жалюзийная дверь, высота ${Math.round(getDoorHeightCm())} см`;
   const doorText = state.doorType === 'ldsp'
     ? 'Можно подобрать цвет под интерьер.'
     : 'Требуется покрыть защитой. Створки можно покрыть после монтажа.';
 
   const bottomTitle = hasBottom
-    ? `Открытая полка снизу: ${bottomCm.toFixed(1)} см`
+    ? `Открытая полка снизу: ${bottomCm.toFixed(0)} см`
     : 'Открытая полка снизу: нет';
   const bottomText = hasBottom
     ? 'Удобно для хранения бытовой химии или корзин.'
@@ -128,7 +128,7 @@ function renderInfoPanel() {
 
   const sectionH = getSideShelfSectionHeightCm();
   const sideTitle = state.sideShelf
-  ? `Боковые открытые полки с высотой ${sectionH.toFixed(1)} см`
+  ? `Боковые открытые полки с высотой ${sectionH.toFixed(0)} см`
   : 'Боковая полка: нет';
   
   const sideText = state.sideShelf
@@ -229,6 +229,16 @@ function bindControls() {
   document.getElementById('modalOverlay').addEventListener('click', e => {
     if (e.target === e.currentTarget) closeModal();
   });
+  const consentCb = document.getElementById('consentCheckbox');
+    if (consentCb) {
+    consentCb.addEventListener('change', function() {
+        const err = document.getElementById('consentError');
+        if (this.checked && err) {
+        err.style.display = 'none';
+        this.parentElement.classList.remove('error');
+        }
+    });
+    }
 }
 
 function bindSlider(sliderId, valId, setter, suffix) {

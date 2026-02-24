@@ -57,8 +57,17 @@ function renderPrice() {
     <div class="price-total"><span>Итого</span><span>${fmt(p.total)} ₽</span></div>
 
     <div class="price-note">
-      *ориентировочная стоимость. Точный расчёт после обработки заявки мастером/менеджером.
-       Материалы заказываются самостоятельно. Менеджер соберёт корзину и отправит ссылку для заказа.
+      *Ориентировочная стоимость. Точный расчёт после обработки заявки мастером/менеджером.
+       Материалы заказываются самостоятельно. Мастер соберёт корзину и отправит ссылку для заказа.
+    </div>
+    <div class="consent-block">
+        <label class="consent-label">
+            <input type="checkbox" id="consentCheckbox">
+            <span>Согласен с <a href="policy.html" target="_blank">политикой обработки персональных данных</a></span>
+        </label>
+        <div id="consentError" class="consent-error" style="display:none;">
+            Необходимо согласие на обработку персональных данных
+        </div>
     </div>
   `;
 

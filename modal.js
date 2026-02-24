@@ -38,6 +38,19 @@
 
 /** Открыть модальное окно заявки */
 function openModal() {
+  const consent = document.getElementById('consentCheckbox');
+  const consentError = document.getElementById('consentError');
+
+  if (!consent || !consent.checked) {
+    if (consentError) consentError.style.display = 'block';
+    if (consent) consent.parentElement.classList.add('error');
+    return; // не открываем модалку
+  }
+
+  if (consentError) consentError.style.display = 'none';
+  if (consent) consent.parentElement.classList.remove('error');
+
+  document.getElementById('modalOverlay').classList.add('show');
   document.getElementById('modalOverlay').classList.add('show');
 
   const p = calculatePrice();
@@ -75,6 +88,19 @@ function closeModal() {
 
 /** Отправить заявку */
 function sendOrder() {
+
+    const consent = document.getElementById('consentCheckbox');
+    const consentError = document.getElementById('consentError');
+  
+    if (!consent || !consent.checked) {
+        if (consentError) consentError.style.display = 'block';
+        if (consent) consent.parentElement.classList.add('error');
+        return;
+    }
+    
+    if (consentError) consentError.style.display = 'none';
+    if (consent) consent.parentElement.classList.remove('error');
+
   const name = document.getElementById('inputName').value.trim();
   const phone = document.getElementById('inputPhone').value.trim();
   const comment = document.getElementById('inputComment').value.trim();

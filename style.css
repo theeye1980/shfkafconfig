@@ -543,6 +543,41 @@ body {
 .info-item { border: 1px solid #ddd; }
 
 
+.consent-block {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.consent-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #555;
+}
+
+.consent-label input {
+  margin-top: 3px;
+  cursor: pointer;
+}
+
+.consent-label a {
+  color: #1976D2;
+}
+
+.consent-label.error {
+  color: #d32f2f;
+}
+
+.consent-error {
+  color: #d32f2f;
+  font-size: 12px;
+  margin-top: 5px;
+  margin-left: 22px;
+}
+
 
 /* ===== MOBILE ORDER ===== */
 @media (max-width: 800px) {
