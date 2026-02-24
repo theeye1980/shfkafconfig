@@ -61,7 +61,7 @@ const CONFIG = {
 
     framePerM2: 800,
     ldspPerM2: 400,
-    dvpPerM2: 400,
+    dvpPerM2: 600,
     jaluziPerDoor: 1200,
     jaluziPerM2: 2000,
     assembly: 3000,
