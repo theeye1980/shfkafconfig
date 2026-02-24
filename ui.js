@@ -158,6 +158,10 @@ function renderInfoPanel() {
       <div class="info-text">В стандатрном виде сюда входит крепеж, простые петли БЕЗ доводчика, упор-защелка для открывания створок, а также набор уголков для крепления полочек. <br> 
       При желании поставить створки с доводчиком, сообщите мастеру или менеджеру</div>
     </details>
+    <br><br>
+    <div class="info-title">Связаться с мастером:</div>
+    <div class="info-text">tg: <a href="https://t.me/Theeye198">theeye198</a></div>
+    <div class="info-text">phone: +7 926 818 11 84</div>
   `;
 }
 
