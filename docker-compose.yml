@@ -1,0 +1,22 @@
+version: "3.8"
+
+networks:
+  web:
+    external: true
+
+services:
+  shkafconfig:
+    image: nginx:alpine
+    container_name: shkafconfig
+    restart: unless-stopped
+    volumes:
+      - ./:/usr/share/nginx/html:ro
+    networks:
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.shkafconfig.rule=Host(`config.kosarev.site`)"
+      - "traefik.http.routers.shkafconfig.entrypoints=websecure"
+      - "traefik.http.routers.shkafconfig.tls=true"
+      - "traefik.http.routers.shkafconfig.tls.certresolver=myresolver"
+      - "traefik.http.services.shkafconfig.loadbalancer.server.port=80"
