@@ -332,6 +332,26 @@ body {
   height: auto;
 }
 
+.svg-container { position: relative; }
+
+.svg-download{
+  position:absolute; right:12px; top:12px;
+  width:36px; height:36px; border-radius:10px;
+  border:none; background:#ffffffcc;
+  box-shadow:0 2px 8px rgba(0,0,0,.15);
+  cursor:pointer; font-size:18px;
+}
+
+.svg-author{
+  position:absolute; left:10px; bottom:10px;
+  font-family:'Caveat', cursive;
+  font-size:16px; color:#222;
+  background:#ffffffcc; padding:4px 10px;
+  border-radius:8px;
+}
+.svg-author a{ color:#1a4ab0; text-decoration:none; }
+.author-icon{ margin-right:6px; }
+
 /* ===== МОДАЛЬНОЕ ОКНО ===== */
 
 .info-panel {
@@ -521,6 +541,8 @@ body {
 /* подровнять элементы внутри */
 .info-title { font-size: 16px; border-bottom: 2px solid #e0e0e0; padding-bottom: 6px; margin-bottom: 8px; }
 .info-item { border: 1px solid #ddd; }
+
+
 
 /* ===== MOBILE ORDER ===== */
 @media (max-width: 800px) {

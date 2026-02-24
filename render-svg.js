@@ -364,6 +364,16 @@ function renderSVG() {
       Math.round(doorHcm) + ' см', dimCol, fontSize, 'end', -90));
   }
 
+    // ======== ВОДЯНОЙ ЗНАК ========
+  const wm = `
+    <text x="${r(startX + nicheWpx/2)}" y="${r(startY + cabH - 6)}"
+          text-anchor="middle" font-size="18"
+          fill="#000" opacity="0.4"
+          style="pointer-events:none; user-select:none;">
+      https://config.kosarev.site
+    </text>`;
+  parts.push(wm);
+
   svg.innerHTML = parts.join('\n');
 }
 
