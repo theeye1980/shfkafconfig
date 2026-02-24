@@ -155,7 +155,7 @@ function renderSVG() {
     const openZoneCenterY = r(doorBottomY + bottomOpenPx / 2);
     const openZoneCenterX = r(startX + nicheWpx / 2);
     parts.push(dimText(openZoneCenterX, openZoneCenterY,
-      `${bottomOpenCm.toFixed(1)} см`, '#888', 11, 'middle', 0));
+      `${Math.round(bottomOpenCm)} см`, '#888', 11, 'middle', 0));
   }
 
   // ======== ПОЛКИ (в зоне створок, равномерно) ========
@@ -298,8 +298,8 @@ function renderSVG() {
   parts.push(dimLine(r(rightEdge + gap + dimOff), startY, r(rightEdge + gap + dimOff), r(startY + cabH), dimCol));
   parts.push(dimArrow(r(rightEdge + gap + dimOff), startY, 'up', dimCol));
   parts.push(dimArrow(r(rightEdge + gap + dimOff), r(startY + cabH), 'down', dimCol));
-  parts.push(dimText(r(rightEdge + gap + dimOff + 6), r(startY + cabH / 2),
-    state.height + ' см', dimCol, fontSize, 'start', -90));
+  parts.push(dimText(r(rightEdge + gap + dimOff + 8), r(startY + cabH / 2),
+    state.height + ' см (ниша)', dimCol, fontSize, 'start', -90));
 
   // Ширина ниши (габарит) — ВЫШЕ
   parts.push(dimLine(startX, dimYOverall, r(startX + nicheWpx), dimYOverall, dimCol));
@@ -316,7 +316,7 @@ function renderSVG() {
     parts.push(dimArrow(mainX, dimY2, 'left', dimCol));
     parts.push(dimArrow(r(mainX + mainWpx), dimY2, 'right', dimCol));
     parts.push(dimText(r(mainX + mainWpx / 2), r(dimY2 - 6),
-      mainWidthCm.toFixed(1) + ' см', dimCol, fontSize, 'middle', 0));
+      Math.round(mainWidthCm) + ' см', dimCol, fontSize, 'middle', 0));
 
     const sideStartX2 = sideX;
     const sideEndX = r(sideStartX2 + sideWpx);
@@ -324,7 +324,7 @@ function renderSVG() {
     parts.push(dimArrow(sideStartX2, dimY2, 'left', dimCol));
     parts.push(dimArrow(sideEndX, dimY2, 'right', dimCol));
     parts.push(dimText(r((sideStartX2 + sideEndX) / 2), r(dimY2 - 6),
-      sideSectionCm.toFixed(1) + ' см', dimCol, fontSize, 'middle', 0));
+      Math.round(sideSectionCm) + ' см', dimCol, fontSize, 'middle', 0));
   }
 
   // Высота створок (слева, если есть открытая зона)
@@ -338,7 +338,7 @@ function renderSVG() {
     parts.push(dimArrow(dlX, doorTopY, 'up', dimCol));
     parts.push(dimArrow(dlX, doorBottomY, 'down', dimCol));
     parts.push(dimText(r(dlX - 6), r(doorTopY + doorHpx / 2),
-      doorHcm.toFixed(1) + '', dimCol, 11, 'end', -90));
+      Math.round(doorHcm) + ' см', dimCol, fontSize, 'end', -90));
   }
 
     svg.innerHTML = parts.join('\n');
