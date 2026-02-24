@@ -68,36 +68,33 @@ function updateColorVisibility() {
 }
 
 function syncDoorHeightLimits() {
-  const maxH = state.height - 4;
-  const minH = CONFIG.ldspDoorHeight.min;
+  const innerH = state.height - 2 * CONFIG.frameThickness;
+  const maxOpen = Math.min(50, Math.max(0, innerH - CONFIG.ldspDoorHeight.min));
 
   const slider = document.getElementById('sliderDoorH');
   if (!slider) return;
 
-  slider.min = minH;
-  slider.max = maxH;
+  slider.min = 0;
+  slider.max = Math.floor(maxOpen);
 
-  if (state.doorHeight > maxH) state.doorHeight = maxH;
-  if (state.doorHeight < minH) state.doorHeight = minH;
+  if (state.bottomOpenHeight > maxOpen) state.bottomOpenHeight = Math.floor(maxOpen);
+  if (state.bottomOpenHeight < 0) state.bottomOpenHeight = 0;
 
-  slider.value = state.doorHeight;
-  document.getElementById('valDoorH').textContent = state.doorHeight + ' см';
+  slider.value = state.bottomOpenHeight;
+  document.getElementById('valDoorH').textContent = state.bottomOpenHeight + ' см';
 }
 
 function updateBottomOpenInfo() {
-  const bottomCm = getBottomOpenCm();
+  const doorH = getDoorHeightCm();
   const info = document.getElementById('infoDoorHeight');
   if (!info) return;
 
-  if (bottomCm > 1) {
-    info.textContent = `Открытая полка снизу: ${bottomCm.toFixed(1)} см`;
-    info.style.color = '#4a7c59';
-  } else if (bottomCm < -0.5) {
-    info.textContent = `⚠ Створки не влезают! Превышение: ${Math.abs(bottomCm).toFixed(1)} см`;
+  if (doorH < CONFIG.ldspDoorHeight.min) {
+    info.textContent = `⚠ Створки не влезают!`;
     info.style.color = '#c62828';
   } else {
-    info.textContent = 'Открытая полка снизу: нет';
-    info.style.color = '#888';
+    info.textContent = `Высота створки: ${Math.round(doorH)} см`;
+    info.style.color = '#4a7c59';
   }
 }
 
@@ -113,14 +110,14 @@ function renderInfoPanel() {
     : 'Материал корпуса: Мебельный щит';
   const bodyText = state.bodyType === 'ldsp'
     ? 'ЛДСП дешевле, стабильный материал, подходит для влажных помещений.'
-    : 'Массив, выше стоимость, но теплее и «живее» выглядит.';
+    : 'Массив, выше стоимость, но теплее и «живее» выглядит. Требует обработки с целью защиты от грибка и влаги. Нужно делать ДО монтажа.';
 
   const doorTitle = state.doorType === 'ldsp'
-    ? 'Материал створок: ЛДСП'
-    : 'Материал створок: Жалюзийная дверь';
+    ? `Створки: выбран материал ЛДСП, высота ${Math.round(getDoorHeightCm())} см`
+    : `Створки: выбрана жалюзийная дверь, высота ${Math.round(getDoorHeightCm())} см`;
   const doorText = state.doorType === 'ldsp'
     ? 'Можно подобрать цвет под интерьер.'
-    : 'Рекомендуется покрыть защитой. Створки можно покрыть после монтажа.';
+    : 'Требуется покрыть защитой. Створки можно покрыть после монтажа.';
 
   const bottomTitle = hasBottom
     ? `Открытая полка снизу: ${bottomCm.toFixed(1)} см`
@@ -174,10 +171,10 @@ function bindControls() {
   bindSlider('sliderWidth', 'valWidth', v => { state.width = v; }, 'см');
   bindSlider('sliderDepth', 'valDepth', v => { state.depth = v; }, 'см');
 
-  bindSlider('sliderDoorH', 'valDoorH', v => {
-    state.doorHeight = v;
+    bindSlider('sliderDoorH', 'valDoorH', v => {
+    state.bottomOpenHeight = v;
     updateBottomOpenInfo();
-  }, 'см');
+    }, 'см');
 
   bindCounter('shelvesMin', 'shelvesPlus', 'valShelves', 1, 5,
     () => state.shelves, v => { state.shelves = v; });

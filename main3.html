@@ -44,7 +44,7 @@
       <div class="section-title">Корпус</div>
 
       <div class="control-group">
-        <label>Материал корпуса</label>
+        
         <div class="radio-group">
           <input type="radio" name="bodyType" id="bodyLDSP" value="ldsp" checked>
           <label for="bodyLDSP">ЛДСП</label>
@@ -57,6 +57,42 @@
           <label>Цвет корпуса</label>
           <div class="color-palette" id="paletteBody"></div>
       </div>
+
+
+            <div class="control-group">
+        <label class="checkbox-row">
+          <input type="checkbox" id="chkSideShelf" checked>
+          Боковая полка
+        </label>
+      </div>
+
+      <div class="sub-group" id="sideShelfOptions">
+        <div class="control-group">
+          <label>Сторона</label>
+          <div class="radio-group">
+            <input type="radio" name="sideShelfSide" id="sideLeft" value="left" checked>
+            <label for="sideLeft">Слева</label>
+            <input type="radio" name="sideShelfSide" id="sideRight" value="right">
+            <label for="sideRight">Справа</label>
+          </div>
+        </div>
+        <div class="control-group">
+          <label>Ширина боковой полки</label>
+          <div class="slider-row">
+            <input type="range" id="sliderSideShelfW" min="12" max="27" value="19" step="1">
+            <span class="slider-value" id="valSideShelfW">17 см</span>
+          </div>
+        </div>
+        <div class="control-group">
+          <label>Полок в боковой секции</label>
+          <div class="counter">
+            <button id="sideShelvesMinus">−</button>
+            <span class="counter-value" id="valSideShelves">2</span>
+            <button id="sideShelvesPlus">+</button>
+          </div>
+        </div>
+      </div>
+
       <!-- === СЕКЦИЯ: СТВОРКИ === -->
       <div class="section-title">Створки</div>
 
@@ -80,53 +116,21 @@
       </div>
 
       <div class="control-group">
-      <label>Высота открытой полки</label>
-      <div class="slider-row">
-          <input type="range" id="sliderDoorH" min="60" max="130" value="76" step="1">
-          <span class="slider-value" id="valDoorH">76 см</span>
-      </div>
+        <label>Высота открытой полки 3</label>
+        <div class="slider-row">
+        <input type="range" id="sliderDoorH" min="0" max="50" value="30" step="1">
+        <span class="slider-value" id="valDoorH">30 см</span>
+        </div>
       </div>
 
-      <div class="info-text" id="infoDoorHeight">Высота створки: 76 см</div>
+     <div class="info-text" id="infoDoorHeight">Высота створки: 76 см</div>
 
       <div class="control-group" id="doorColorGroup">
         <label>Цвет створок</label>
         <div class="color-palette" id="paletteDoor"></div>
       </div>
       
-      <div class="control-group">
-        <label class="checkbox-row">
-          <input type="checkbox" id="chkSideShelf" checked>
-          Боковая полка
-        </label>
-      </div>
 
-      <div class="sub-group" id="sideShelfOptions">
-        <div class="control-group">
-          <label>Сторона</label>
-          <div class="radio-group">
-            <input type="radio" name="sideShelfSide" id="sideLeft" value="left" checked>
-            <label for="sideLeft">Слева</label>
-            <input type="radio" name="sideShelfSide" id="sideRight" value="right">
-            <label for="sideRight">Справа</label>
-          </div>
-        </div>
-        <div class="control-group">
-          <label>Ширина боковой полки</label>
-          <div class="slider-row">
-            <input type="range" id="sliderSideShelfW" min="15" max="27" value="20" step="1">
-            <span class="slider-value" id="valSideShelfW">20 см</span>
-          </div>
-        </div>
-        <div class="control-group">
-          <label>Полок в боковой секции</label>
-          <div class="counter">
-            <button id="sideShelvesMinus">−</button>
-            <span class="counter-value" id="valSideShelves">2</span>
-            <button id="sideShelvesPlus">+</button>
-          </div>
-        </div>
-      </div>
 
 
 

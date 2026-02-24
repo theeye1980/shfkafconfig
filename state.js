@@ -8,19 +8,21 @@ const state = {
   shelves: 2,
   doors: 2,
   doorType: 'ldsp',
-  doorHeight: 76,
 
-  bodyType: 'ldsp',        // ldsp | shield
+  bottomOpenHeight: 30, // ← новое
+  bodyType: 'ldsp',
   bodyColorId: 'white',
   doorColorId: 'white',
 
   sideShelf: true,
-  sideShelfSide: 'right',
-  sideShelfWidth: 20,
+  sideShelfSide: 'left',
+  sideShelfWidth: 17,
   sideShelves: 2,
 };
+
 function getDoorHeightCm() {
-  return state.doorHeight;
+  const innerH = state.height - 2 * CONFIG.frameThickness;
+  return innerH - state.bottomOpenHeight;
 }
 
 function getDoorWidthCm() {
@@ -32,8 +34,11 @@ function getDoorWidthCm() {
 }
 
 function getBottomOpenCm() {
-  const innerH = state.height - 2 * CONFIG.frameThickness;
-  return innerH - getDoorHeightCm();
+  return state.bottomOpenHeight;
+}
+
+function initDoorDefaults() {
+  state.bottomOpenHeight = CONFIG.defaultBottomOpenHeight;
 }
 
 function getSideShelfSectionHeightCm() {

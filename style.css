@@ -63,7 +63,7 @@ body {
 .control-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 7px;
 }
 
 .control-group label {
@@ -459,7 +459,7 @@ body {
 
 .section-title { font-size: 13px; margin-top: 4px; padding-top: 6px; }
 
-.control-group { gap: 5px; }
+.control-group { gap: 12px; }
 .control-group label { font-size: 11px; letter-spacing: 0.4px; }
 
 .slider-row { gap: 9px; }
@@ -478,7 +478,7 @@ body {
 
 .sub-group { margin-left: 10px; padding-left: 10px; gap: 4px; }
 
-.info-text, .jaluzi-note { font-size: 11px; }
+.info-text, .jaluzi-note { font-size: 13px; }
 
 .price-block { padding: 12px; }
 .price-block h3 { font-size: 13px; margin-bottom: 6px; }

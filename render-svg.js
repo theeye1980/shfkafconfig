@@ -133,15 +133,6 @@ function renderSVG() {
   parts.push(svgRect(r(mainX + ftPx), r(startY + cabH - ftPx), r(mainWpx - 2 * ftPx), ftPx, frameColor, darken(frameColor, 30), 1));
 
   // ======== РАЗДЕЛИТЕЛЬНАЯ ПОЛКА (между створками и открытой зоной) ========
-  /*if (bottomOpenCm > 1) {
-    const divShelfLeft = r(startX + ftPx);
-    const divShelfRight = r(startX + nicheWpx - ftPx);
-    const divShelfW = r(divShelfRight - divShelfLeft);
-    parts.push(svgRect(
-      divShelfLeft, r(doorBottomY - stPx / 2), divShelfW, stPx,
-      shelfColor, darken(shelfColor, 25), 0.9
-    ));*/
-
   if (bottomOpenCm > 1) {
     const divShelfLeft = r(startX + ftPx);
     const divShelfRight = r(startX + nicheWpx - ftPx);
@@ -251,6 +242,23 @@ function renderSVG() {
           shelfColor, darken(shelfColor, 25), 0.8));
       }
 
+      // Размер высоты одной боковой полки
+      if (state.sideShelves > 0) {
+        
+        const segHpx = r(sideInnerH / sideSegments);
+        const y1 = sideInnerTop;
+        const y2 = r(sideInnerTop + segHpx);
+        const x = r(sideX + ftPx + 12);
+        const yMid = r(y1 + segHpx / 2);
+
+        parts.push(dimLine(x, y1, x, y2, S.dimColor));
+        parts.push(dimArrow(x, y1, 'up', S.dimColor));
+        parts.push(dimArrow(x, y2, 'down', S.dimColor));
+        parts.push(dimText(r(x + 8), r((y1 + y2) / 2),
+          Math.round(getSideShelfSectionHeightCm()) + ' см',
+          S.dimColor, 11, 'middle', -90));
+      }
+
     } else {
       // Внешняя правая боковина
       const outerSideX = r(sideX + sideWpx - ftPx);
@@ -281,6 +289,21 @@ function renderSVG() {
         const sy = r(sideInnerTop + (sideInnerH / sideSegments) * i - stPx / 2);
         parts.push(svgRect(sideShelfContentLeft, sy, sideShelfContentW, stPx,
           shelfColor, darken(shelfColor, 25), 0.8));
+      }
+
+      // Размер высоты одной боковой полки
+      if (state.sideShelves > 0) {
+        const segHpx = r(sideInnerH / sideSegments);
+        const y1 = sideInnerTop;
+        const y2 = r(sideInnerTop + segHpx);
+        const x = r(sideShelfContentRight - 6);
+
+        parts.push(dimLine(x, y1, x, y2, S.dimColor));
+        parts.push(dimArrow(x, y1, 'up', S.dimColor));
+        parts.push(dimArrow(x, y2, 'down', S.dimColor));
+        parts.push(dimText(r(x - 6), r((y1 + y2) / 2),
+          Math.round(getSideShelfSectionHeightCm()) + ' см',
+          S.dimColor, 11, 'end', -90));
       }
     }
   }
@@ -337,12 +360,13 @@ function renderSVG() {
     parts.push(dimLine(dlX, doorTopY, dlX, doorBottomY, dimCol));
     parts.push(dimArrow(dlX, doorTopY, 'up', dimCol));
     parts.push(dimArrow(dlX, doorBottomY, 'down', dimCol));
-    parts.push(dimText(r(dlX - 6), r(doorTopY + doorHpx / 2),
+    parts.push(dimText(r(dlX - 12), r(doorTopY + doorHpx / 2),
       Math.round(doorHcm) + ' см', dimCol, fontSize, 'end', -90));
   }
 
-    svg.innerHTML = parts.join('\n');
-  }
+  svg.innerHTML = parts.join('\n');
+}
+
 
 
 // ======== SVG-ХЕЛПЕРЫ ========
