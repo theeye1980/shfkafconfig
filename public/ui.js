@@ -160,7 +160,8 @@ function renderInfoPanel() {
     </details>
     <br><br>
     <div class="info-title">Связаться с мастером:</div>
-    <div class="info-text">tg: <a href="https://t.me/Theeye198">theeye198</a></div>
+    <div class="info-text">Telegram: <a href="https://t.me/Theeye198">theeye198</a></div>
+    <div class="info-text">MAX: <a href="https://max.ru/u/f9LHodD0cOIP8vyBV8CFH-l_eO08_PfktfUDQzJ-MnF900VTL5WoDsL9U_s">Написать</a></div>
     <div class="info-text">phone: +7 926 818 11 84</div>
   `;
 }
