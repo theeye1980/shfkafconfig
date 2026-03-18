@@ -9,6 +9,7 @@ from datetime import datetime
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
+
 app = FastAPI()
 
 SMTP_HOST = os.getenv("SMTP_HOST", "smtp.mail.ru")
@@ -104,7 +105,7 @@ def build_html(data: dict) -> str:
 
 def send_email(subject: str, html_body: str):
     msg = MIMEMultipart("alternative")
-    msg["From"] = formataddr((str(Header("Konfigurator", "ascii")), EMAIL_ADDRESS))
+    msg["From"] = formataddr((str(Header("Конфигуратор шкафов", "utf-8")), EMAIL_ADDRESS))
     msg["To"] = SEND_TO
     msg["Subject"] = Header(subject, "utf-8")
 
