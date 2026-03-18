@@ -4,7 +4,6 @@ reports/
 __pycache__/
 .idea/
 .env
-config.js
 *config.py
 
 
