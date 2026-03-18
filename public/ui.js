@@ -163,6 +163,7 @@ function renderInfoPanel() {
     <div class="info-text">Telegram: <a href="https://t.me/Theeye198">theeye198</a></div>
     <div class="info-text">MAX: <a href="https://max.ru/u/f9LHodD0cOIP8vyBV8CFH-l_eO08_PfktfUDQzJ-MnF900VTL5WoDsL9U_s">Написать</a></div>
     <div class="info-text">phone: +7 926 818 11 84</div>
+    <div class="info-text"><a href="https://max.ru/join/1aJYPS6l8gR-q5lEJ5ky98llTnW14dwj3g6tq07PMxE">Канал MAX</a> </div>
   `;
 }
 
